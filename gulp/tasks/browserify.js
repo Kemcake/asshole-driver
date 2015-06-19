@@ -13,15 +13,18 @@ var watchify     = require('watchify');
 var reactify = require('reactify');
 var bundleLogger = require('../util/bundleLogger');
 var gulp         = require('gulp');
+var gulpif       = require('gulp-if');
+var uglify       = require('gulp-uglify');
 var handleErrors = require('../util/handleErrors');
 var source       = require('vinyl-source-stream');
+var buffer       = require('vinyl-buffer');
 var config       = require('../config').browserify;
 
 gulp.task('browserify', function(callback) {
 
   var bundleConfig = config.bundleConfig;
   var bundleQueue = config.bundleConfigs.length;
-
+  
   var browserifyThis = function(bundleConfig) {
 
     var bundler = browserify({
@@ -35,17 +38,16 @@ gulp.task('browserify', function(callback) {
       debug: config.debug
     });
     bundler.transform(reactify);
+    
     var bundle = function() {
       // Log when bundling starts
       bundleLogger.start(bundleConfig.outputName);
       return bundler
         .bundle()
-        // Report compile errors
-        .on('error', handleErrors)
-        // Use vinyl-source-stream to make the
-        // stream gulp compatible. Specifiy the
-        // desired output filename here.
+        .on('error', handleErrors)        
         .pipe(source(bundleConfig.outputName))
+        .pipe(buffer())
+        .pipe(gulpif(process.env.NODE_ENV == 'production', uglify()))
         // Specify the output destination
         .pipe(gulp.dest(bundleConfig.dest))
         .on('end', reportFinished);

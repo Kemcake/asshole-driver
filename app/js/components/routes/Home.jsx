@@ -34,8 +34,9 @@ var Home = React.createClass({
       if (status == google.maps.DirectionsStatus.OK && result.routes.length > 0) {
         console.log(result);
         var speed = this.refs.speedInput.getDOMNode().value;
-        console.log("speed "+speed);
+        console.log("speed "+speed+"km/h");
         this.setState({asshole:speed >= 135, directions:result.routes[0]})
+        document.getElementById("directions").scrollIntoView();
       }
     }.bind(this));
     //search maps directions  
@@ -70,14 +71,20 @@ var Home = React.createClass({
   getSearchNode: function() {
     return (
         <div className="search">
-          <label className="from">From</label>
-          <input className="from" ref="fromInput" type="text" placeholder="1 Hacker Way, Menlo Park, CA" /> 
-          <label className="to">To</label>
-          <input className="to" ref="toInput" type="text" placeholder="Destination" />
+          <div className="input-wrap">
+            <label className="from">From</label>
+            <input className="from" ref="fromInput" type="text" placeholder="1 Hacker Way, Menlo Park, CA" /> 
+          </div>
+          <div className="input-wrap">
+            <label className="to">To</label>
+            <input className="to" ref="toInput" type="text" placeholder="Destination" />
+          </div>
           <br/>
-          <label className="speed">{"Max Speed (km/h)"}</label>
-          <input className="speed" ref="speedInput" type="number" defaultValue={200} step="1" />
-          
+          <div className="input-wrap">
+            <label className="speed">{"Max Speed (km/h)"}</label>
+            <input className="speed" ref="speedInput" type="number" defaultValue={200} step="1" />
+          </div>
+          <br/>
           <button className="launch" onClick={this.onSearch}>Calculate</button>
         </div>
     );
@@ -90,13 +97,15 @@ var Home = React.createClass({
     var distance = leg.distance.text;
     var to = leg.end_address;
     var from = leg.start_address;
+    var href = "https://www.google.com/maps/dir/"+from+"/"+to;
+    href.replace(" ", "+");
+
     var overlay;
-    
     if (this.state.asshole) {
       overlay = <div className="overlay">Go f**k yourself. <br/> Please.</div>;
     }
     return (
-        <div className="directions">
+        <div id="directions" className="directions">
           <img className="down" src="images/arrow_down.png"/>
           <div className="result">
             <span className="time">
@@ -108,7 +117,7 @@ var Home = React.createClass({
             {overlay}
             {this.getDescriptionNode(time, from, to)}
           </div>
-          <a className="open" href={"#"} target="_blank"><img src="images/arrow.png" /></a>
+          <a className="open" href={href} target="_blank"><img src="images/arrow.png" /></a>
         </div>
     );
   },
