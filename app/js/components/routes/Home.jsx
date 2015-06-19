@@ -118,7 +118,7 @@ var Home = React.createClass({
     if (this.state.asshole) {
       return (
         <div className="description">
-          {"It takes approximately"} <strong>{time}</strong> to go from <strong>{from}</strong> to <strong>{to}</strong>{"if you drive really fast."}
+          {"It takes approximately"} <strong>{time}</strong> to go from <strong>{from}</strong> to <strong>{to}</strong>{" if you drive really fast."}
           <br/> 
           {"Yes. Because you'll crash in a f**cking tree 🚑🚨. You will not die, but do not expect to walk again ♿️. You will have a penis-shaped scar on your head and children will laugh at you.  Asshole. 🔫"}
           <br/>

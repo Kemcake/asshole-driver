@@ -1,16 +1,10 @@
-# Parse React Sample app #
+# Asshole
 
-Todo app made with ReactJS and ParseReact
+See how much time you can win by driving faster
 
-[*working example*](http://alley.parseapp.com)
+[haslose.com](http://haslose.com)
 
-## What's inside ?
-- React (JSX)
-- Parse React
-- Gulp (browsersyn-browserify-etc.)
-- Sass
-- Test (using Jest)
-- Routing (using react-router)
+------------
 
 ## Setup
 
