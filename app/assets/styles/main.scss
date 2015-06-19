@@ -32,6 +32,7 @@ body {
   font-family: "Helvetica-Nueue", sans-serif;
   font-weight: lighter;
   background: $backgroundColor;
+  width: 100%;
 }
 
 /* NAVBAR */
@@ -110,11 +111,12 @@ body {
         font-size: 20px;
         font-weight: 200;
         outline: none;
-        
+        border-radius: 0;
+        padding-left: 0;
         &.speed {
           display: block;
           width: 100px;
-          min-width: 100px;
+          min-width: 110px;
           margin: auto;
           margin-top: 30px;
           margin-bottom: 20px;
@@ -154,7 +156,6 @@ body {
   
   .directions {
     width: 100%;
-    height: 200px;
     max-width: 600px;
     margin: auto;
     margin-bottom: 50px;
@@ -164,6 +165,7 @@ body {
       top: -40px;
     }
     .result {
+      padding: 0 10px;
       span {
         &.time {
           font-size: 60px;
@@ -184,10 +186,14 @@ body {
         font-size: 40px;
         font-weight: 700;
         transform: rotateZ(-15deg);
+        @media (max-width: 600px) {
+            width: 350px;
+            margin-left: 0px;
+            margin-top: -100px;
+        }
       }
       .description {
         margin-top: 50px;
-        padding: 0px 20px;
         .emoji {
           font-size: 80px;
         }

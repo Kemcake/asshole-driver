@@ -93,7 +93,8 @@ var Home = React.createClass({
   getResultNode: function() {
     if (this.state.directions === undefined || this.state.directions.legs.length < 0) { return null }
     var leg = this.state.directions.legs[0];
-    var time = this.secondsToString(leg.duration.value*(this.state.asshole? 10:1));
+    var duration = this.state.asshole ? leg.duration.value * 10 : leg.duration.value;
+    var time = this.secondsToString(duration);
     var distance = leg.distance.text;
     var to = leg.end_address;
     var from = leg.start_address;
