@@ -11,7 +11,7 @@ var NavBar = React.createClass({
   render: function() {
     return (
       <div id="navbar">
-        <a href="http://github.com/kemcake/asshole" 
+        <a href="http://github.com/kemcake/asshole-driver" 
           target="_blank">
           Github
         </a>
